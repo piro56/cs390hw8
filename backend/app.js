@@ -7,6 +7,7 @@ import logger from "morgan";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
 
+import blogRouter from "./routes/blog.js";
 import indexRouter from "./routes/index.js";
 
 const app = express();
@@ -15,9 +16,30 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use("/", indexRouter);
-app.use(express.static(path.join(__dirname, "public")));
+
+app.use('/', (req,res,next) => {
+  if (req.app.locals.init == undefined) {
+    req.app.locals.init = true;
+    req.app.locals.auth = false;
+  }
+  next();
+});
+app.use('/blog/badlogin', express.static(__dirname + '/public/invalid.html'))
+
+app.use(
+  "/blog",
+  (req, res, next) => {
+    //
+    // check for password soon
+    // maybe on wed
+
+    next();
+  },
+  blogRouter
+);
 
 export default app;
