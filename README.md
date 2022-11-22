@@ -1,16 +1,9 @@
-# Express + React template
+# CS390 HW 9
 
-To use this template, download this repo or use [degit](https://npm.im/degit)
+## Logins:
+- Username does not matter
+- Password: 'password'... yes, the password is password
 
-
-```
-cd fullstack-template
-npm install
-# in frontend folder 
-npm install
-# in backend folder
-#npm install
-# in fullstack-template (root) folder
-npm run dev
-
-```
+## Delete:
+- Must be logged in to delete.
+- Will be redirected to /auth which is the login page.
